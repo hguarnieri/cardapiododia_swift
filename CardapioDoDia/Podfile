@@ -1,0 +1,5 @@
+platform :ios, '8.0'
+
+pod 'SwipeView', '~> 1.3'
+
+use_frameworks!
