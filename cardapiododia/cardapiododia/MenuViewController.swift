@@ -34,15 +34,15 @@ class MenuViewController: UIViewController, SwipeViewDelegate, SwipeViewDataSour
         self.navigationItem.rightBarButtonItem = button
 
         self.widthOfSwipeView = self.view.frame.size.width * 0.7
-        self.heightOfSwipeView = self.view.frame.size.height * 0.75
+        self.heightOfSwipeView = self.view.frame.size.height * 0.7
         self.widthOfCard = self.view.frame.size.width * 0.6
-        self.heightOfCard = self.view.frame.size.height * 0.75
+        self.heightOfCard = self.view.frame.size.height * 0.7
 
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "background")!)
     
         self.swipeView = SwipeView(frame: CGRectMake(0, 0, self.widthOfSwipeView, self.heightOfSwipeView))
         self.swipeView.center.x = (self.view.frame.size.width / 2)
-        self.swipeView.center.y = (self.view.frame.size.height / 2)
+        self.swipeView.center.y = (self.view.frame.size.height / 2) - 44
         self.swipeView.itemsPerPage = 1
         self.swipeView.delegate = self
         self.swipeView.dataSource = self
@@ -55,7 +55,7 @@ class MenuViewController: UIViewController, SwipeViewDelegate, SwipeViewDataSour
         self.segmentedControl.tintColor = UIColor.redColor()
         self.segmentedControl.addTarget(self, action: Selector("segmentedControlChanged"), forControlEvents: UIControlEvents.ValueChanged)
         
-        let mainView = UIView(frame: CGRectMake(0, 0, self.view.frame.width, self.swipeView.frame.maxY - 44))
+        let mainView = UIView(frame: CGRectMake(0, 0, self.view.frame.width, self.swipeView.frame.maxY))
         
         mainView.addSubview(self.segmentedControl)
         mainView.addSubview(self.swipeView)

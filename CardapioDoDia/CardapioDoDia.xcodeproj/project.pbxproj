@@ -19,6 +19,7 @@
 		AE8FE68B1C5B62810088CB39 /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8FE68A1C5B62810088CB39 /* MenuController.swift */; };
 		AE8FE68D1C5B62CF0088CB39 /* MenuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8FE68C1C5B62CF0088CB39 /* MenuModel.swift */; };
 		AE8FE68F1C5B78A50088CB39 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8FE68E1C5B78A50088CB39 /* HomeViewController.swift */; };
+		AE8FE6931C5B81F50088CB39 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8FE6921C5B81F50088CB39 /* NavigationController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		AE8FE68A1C5B62810088CB39 /* MenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
 		AE8FE68C1C5B62CF0088CB39 /* MenuModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuModel.swift; sourceTree = "<group>"; };
 		AE8FE68E1C5B78A50088CB39 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		AE8FE6921C5B81F50088CB39 /* NavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		D065CFE755236821E400D67C /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		E494D7D405BDD2E86AADBF72 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -94,6 +96,7 @@
 				AE8FE68A1C5B62810088CB39 /* MenuController.swift */,
 				AE8FE68C1C5B62CF0088CB39 /* MenuModel.swift */,
 				AE8FE68E1C5B78A50088CB39 /* HomeViewController.swift */,
+				AE8FE6921C5B81F50088CB39 /* NavigationController.swift */,
 			);
 			path = cardapiododia;
 			sourceTree = "<group>";
@@ -231,6 +234,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AE8FE68B1C5B62810088CB39 /* MenuController.swift in Sources */,
+				AE8FE6931C5B81F50088CB39 /* NavigationController.swift in Sources */,
 				AE8FE6891C5B5DC50088CB39 /* IphoneVersioning.swift in Sources */,
 				AE8FE68D1C5B62CF0088CB39 /* MenuModel.swift in Sources */,
 				AE32EE3C1C4E105400C6F491 /* MenuViewController.swift in Sources */,
