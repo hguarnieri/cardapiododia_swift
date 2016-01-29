@@ -9,25 +9,33 @@
 /* Begin PBXBuildFile section */
 		38574A82A23D2F1848343E2E /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E494D7D405BDD2E86AADBF72 /* Pods.framework */; };
 		AE32EE3A1C4E105400C6F491 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE32EE391C4E105400C6F491 /* AppDelegate.swift */; };
-		AE32EE3C1C4E105400C6F491 /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE32EE3B1C4E105400C6F491 /* MenuController.swift */; };
+		AE32EE3C1C4E105400C6F491 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE32EE3B1C4E105400C6F491 /* MenuViewController.swift */; };
 		AE32EE3F1C4E105400C6F491 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE32EE3D1C4E105400C6F491 /* Main.storyboard */; };
 		AE32EE421C4E105400C6F491 /* cardapiododia.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AE32EE401C4E105400C6F491 /* cardapiododia.xcdatamodeld */; };
 		AE32EE441C4E105400C6F491 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AE32EE431C4E105400C6F491 /* Assets.xcassets */; };
 		AE32EE471C4E105400C6F491 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE32EE451C4E105400C6F491 /* LaunchScreen.storyboard */; };
 		AE698E781C5897D700832C09 /* background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE698E771C5897D700832C09 /* background.jpg */; };
+		AE8FE6891C5B5DC50088CB39 /* IphoneVersioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8FE6881C5B5DC50088CB39 /* IphoneVersioning.swift */; };
+		AE8FE68B1C5B62810088CB39 /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8FE68A1C5B62810088CB39 /* MenuController.swift */; };
+		AE8FE68D1C5B62CF0088CB39 /* MenuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8FE68C1C5B62CF0088CB39 /* MenuModel.swift */; };
+		AE8FE68F1C5B78A50088CB39 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8FE68E1C5B78A50088CB39 /* HomeViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		7B9BCA7C161F7027428808A7 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		AE32EE361C4E105400C6F491 /* cardapiododia.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cardapiododia.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE32EE391C4E105400C6F491 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		AE32EE3B1C4E105400C6F491 /* MenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
+		AE32EE3B1C4E105400C6F491 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		AE32EE3E1C4E105400C6F491 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		AE32EE411C4E105400C6F491 /* cardapiododia.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = cardapiododia.xcdatamodel; sourceTree = "<group>"; };
 		AE32EE431C4E105400C6F491 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AE32EE461C4E105400C6F491 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AE32EE481C4E105400C6F491 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AE698E771C5897D700832C09 /* background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = background.jpg; sourceTree = "<group>"; };
+		AE8FE6881C5B5DC50088CB39 /* IphoneVersioning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IphoneVersioning.swift; sourceTree = "<group>"; };
+		AE8FE68A1C5B62810088CB39 /* MenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
+		AE8FE68C1C5B62CF0088CB39 /* MenuModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuModel.swift; sourceTree = "<group>"; };
+		AE8FE68E1C5B78A50088CB39 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		D065CFE755236821E400D67C /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		E494D7D405BDD2E86AADBF72 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -75,13 +83,17 @@
 			isa = PBXGroup;
 			children = (
 				AE32EE391C4E105400C6F491 /* AppDelegate.swift */,
-				AE32EE3B1C4E105400C6F491 /* MenuController.swift */,
+				AE32EE3B1C4E105400C6F491 /* MenuViewController.swift */,
 				AE32EE3D1C4E105400C6F491 /* Main.storyboard */,
 				AE32EE431C4E105400C6F491 /* Assets.xcassets */,
 				AE698E771C5897D700832C09 /* background.jpg */,
 				AE32EE451C4E105400C6F491 /* LaunchScreen.storyboard */,
 				AE32EE481C4E105400C6F491 /* Info.plist */,
 				AE32EE401C4E105400C6F491 /* cardapiododia.xcdatamodeld */,
+				AE8FE6881C5B5DC50088CB39 /* IphoneVersioning.swift */,
+				AE8FE68A1C5B62810088CB39 /* MenuController.swift */,
+				AE8FE68C1C5B62CF0088CB39 /* MenuModel.swift */,
+				AE8FE68E1C5B78A50088CB39 /* HomeViewController.swift */,
 			);
 			path = cardapiododia;
 			sourceTree = "<group>";
@@ -218,8 +230,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AE32EE3C1C4E105400C6F491 /* MenuController.swift in Sources */,
+				AE8FE68B1C5B62810088CB39 /* MenuController.swift in Sources */,
+				AE8FE6891C5B5DC50088CB39 /* IphoneVersioning.swift in Sources */,
+				AE8FE68D1C5B62CF0088CB39 /* MenuModel.swift in Sources */,
+				AE32EE3C1C4E105400C6F491 /* MenuViewController.swift in Sources */,
 				AE32EE3A1C4E105400C6F491 /* AppDelegate.swift in Sources */,
+				AE8FE68F1C5B78A50088CB39 /* HomeViewController.swift in Sources */,
 				AE32EE421C4E105400C6F491 /* cardapiododia.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -340,6 +356,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.hguarnieri.cardapiododia;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 			};
 			name = Debug;
 		};
@@ -354,6 +371,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.hguarnieri.cardapiododia;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 			};
 			name = Release;
 		};
