@@ -20,6 +20,12 @@ class MenuController {
     var isLoading: Bool = false
     let RELOAD_STRING = "reloadedMenuController"
     
+    //TODO: Get this data from the webservice and create some cache for it
+    let lunchStartingTime = "11:00"
+    let lunchEndingTime = "13:30"
+    let dinnerStartingTime = "17:00"
+    let dinnerEndingTime = "19:15"
+    
     func reloadData() {
         downloadMenus()
     }

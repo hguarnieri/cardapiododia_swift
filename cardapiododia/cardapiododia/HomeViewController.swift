@@ -8,86 +8,144 @@
 
 import Foundation
 import UIKit
+import FontAwesome_swift
 
 class HomeViewController: UIViewController {
     
     var menuViewController: MenuViewController?
     
+    var mainViewWidth: CGFloat!
+    
+    var contentView: UIView!
+    var titleView: UIView!
+    var dateView: UIView!
+    var menuCard: UIView!
+    var busCard: UIView!
+    
     override func viewDidLoad() {
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "background")!)
         
         self.title = "Inicio"
+        self.mainViewWidth = self.view.frame.width
         
-        let topCard = UIView(frame: CGRectMake(0, 44, self.view.frame.width, 120))
-        topCard.backgroundColor = UIColor.redColor()
+        self.contentView = UIView(frame: CGRectMake(0, 0, mainViewWidth, 244))
+        self.contentView.center.y = (mainViewWidth / 2) + 212
+        self.view.addSubview(contentView)
         
-        let contentView = UIView(frame: CGRectMake(0, 0, self.view.frame.width, 244))
-        contentView.center.y = (self.view.frame.width / 2) + 212
+        // Creates the title view
+        self.createTitleView()
+        self.view.addSubview(self.titleView)
+
+        // Creates the date view
+        self.createDateView()
+        self.view.addSubview(self.dateView)
+        
+        // Creates the menu card
+        self.createMenuCard()
+        contentView.addSubview(self.menuCard)
+        
+        // Creates the bus card
+        self.createBusCard()
+        contentView.addSubview(self.busCard)
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+    }
+    
+    //MARK:- View creation functions
+    func createTitleView() {
+        self.titleView = UIView(frame: CGRectMake(0, 44, mainViewWidth, 120))
+        self.titleView.backgroundColor = UIColor.redColor()
         
         let imageHat = UIImage(named: "chefsHat")
         let imageViewHat = UIImageView(image: imageHat)
         imageViewHat.image = (imageViewHat.image?.imageWithRenderingMode(.AlwaysTemplate))!
         imageViewHat.tintColor = UIColor.whiteColor()
         imageViewHat.frame = CGRectMake(16, 0, 70, 70)
-        imageViewHat.center.y = (topCard.frame.height / 2)
+        imageViewHat.center.y = (self.titleView.frame.height / 2)
+        self.titleView.addSubview(imageViewHat)
         
         let title = UILabel(frame: CGRectMake(imageViewHat.frame.maxX + 16, imageViewHat.frame.minY + 4, 200, 22))
         title.font = UIFont.systemFontOfSize(22)
         title.textColor = UIColor.whiteColor()
         title.text = "CARDÁPIO DO DIA"
+        self.titleView.addSubview(title)
         
         let description = UILabel(frame: CGRectMake(imageViewHat.frame.maxX + 16, title.frame.maxY + 5, 250, 40))
         description.textColor = UIColor.whiteColor()
         description.text = "Cardápio e Laranjinha da FZEA na palma da sua mão!"
         description.numberOfLines = 0
         description.sizeToFit()
-        
-        topCard.addSubview(imageViewHat)
-        topCard.addSubview(title)
-        topCard.addSubview(description)
-        
-        let dateCard = UIView(frame: CGRectMake(0, topCard.frame.maxY + 8, self.view.frame.width, 30))
-        dateCard.backgroundColor = UIColor.redColor()
-        let date = UILabel(frame: CGRectMake(8, 0, self.view.frame.width, 20))
-        date.text = "Quarta-Feira, 06 de agosto de 2014"
-        date.textColor = UIColor.whiteColor()
-        date.center.y = (dateCard.frame.height / 2)
-        dateCard.addSubview(date)
-        
-        let menuCard = UIView(frame: CGRectMake(0, 0, self.view.frame.width, 94))
-        menuCard.backgroundColor = UIColor.whiteColor()
-        menuCard.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "swapToMenuViewController"))
-        
-        let lunchText = UILabel(frame: CGRectMake(8, 12, self.view.frame.width, 20))
-        lunchText.text = "Almoço - 11:00 às 13:30"
-        menuCard.addSubview(lunchText)
-        
-        let lineLunch = drawCustomImage(CGSize(width: self.view.frame.width, height: 1))
-        let lineLunchImageView = UIImageView(image: lineLunch)
-        lineLunchImageView.frame = CGRectMake(8, lunchText.frame.maxY + 8, self.view.frame.width - 16, 1)
-        menuCard.addSubview(lineLunchImageView)
-        
-        let dinnerText = UILabel(frame: CGRectMake(8, lunchText.frame.maxY + 16, self.view.frame.width, 20))
-        dinnerText.text = "Jantar - 17:00 às 19:15"
-        menuCard.addSubview(dinnerText)
-        
-        let lineDinner = drawCustomImage(CGSize(width: self.view.frame.width, height: 1))
-        let lineDinnerImageView = UIImageView(image: lineDinner)
-        lineDinnerImageView.frame = CGRectMake(8, dinnerText.frame.maxY + 8, self.view.frame.width - 16, 1)
-        menuCard.addSubview(lineDinnerImageView)
-        
-        contentView.addSubview(menuCard)
-        
-        let busCard = UIView(frame: CGRectMake(0, menuCard.frame.maxY + 20, self.view.frame.width, 150))
-        busCard.backgroundColor = UIColor.whiteColor()
-        contentView.addSubview(busCard)
-        
-        self.view.addSubview(contentView)
-        
-        self.view.addSubview(topCard)
-        self.view.addSubview(dateCard)
+        self.titleView.addSubview(description)
     }
     
+    //TODO: Fix the static time
+    func createDateView() {
+        self.dateView = UIView(frame: CGRectMake(0, self.titleView.frame.maxY + 8, self.mainViewWidth, 30))
+        self.dateView.backgroundColor = UIColor.redColor()
+        
+        let date = UILabel(frame: CGRectMake(8, 0, self.mainViewWidth, 20))
+        date.text = "Quarta-Feira, 06 de agosto de 2014"
+        date.textColor = UIColor.whiteColor()
+        date.center.y = (dateView.frame.height / 2)
+        
+        dateView.addSubview(date)
+    }
+
+    func createMenuCard() {
+        self.menuCard = UIView(frame: CGRectMake(0, 0, self.mainViewWidth, 85))
+        self.menuCard.backgroundColor = UIColor.whiteColor()
+        self.menuCard.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "swapToMenuViewController"))
+        
+        let lunchText = UILabel(frame: CGRectMake(8, 8, self.mainViewWidth, 20))
+        lunchText.font = UIFont.fontAwesomeOfSize(16)
+        lunchText.text = "Almoço - \(Menu.lunchStartingTime) às \(Menu.lunchEndingTime) " + String.fontAwesomeIconWithName(.ClockO)
+        self.menuCard.addSubview(lunchText)
+        
+        let lineLunch = drawLineWithWidth(self.mainViewWidth, height: 1, below: lunchText)
+        self.menuCard.addSubview(lineLunch)
+        
+        let dinnerText = UILabel(frame: CGRectMake(8, lineLunch.frame.maxY + 8, self.mainViewWidth, 20))
+        dinnerText.font = UIFont.fontAwesomeOfSize(16)
+        dinnerText.text = "Jantar - \(Menu.dinnerStartingTime) às \(Menu.dinnerEndingTime) " + String.fontAwesomeIconWithName(.ClockO)
+        self.menuCard.addSubview(dinnerText)
+        
+        let lineDinner = drawLineWithWidth(self.mainViewWidth, height: 1, below: dinnerText)
+        self.menuCard.addSubview(lineDinner)
+    }
+    
+    //TODO: Fix static time
+    func createBusCard() {
+        self.busCard = UIView(frame: CGRectMake(0, menuCard.frame.maxY + 20, self.mainViewWidth, 150))
+        self.busCard.backgroundColor = UIColor.whiteColor()
+        
+        let busTitle = UILabel(frame: CGRectMake(8, 16, self.view.frame.size.width - 8, 20))
+        busTitle.text = "Horário de Ônibus - Interno"
+        self.busCard.addSubview(busTitle)
+        
+        let lineBus = drawCustomImage(CGSize(width: self.mainViewWidth, height: 1))
+        let lineBusImageView = UIImageView(image: lineBus)
+        lineBusImageView.frame = CGRectMake(8, busTitle.frame.maxY + 8, self.mainViewWidth - 16, 1)
+        self.busCard.addSubview(lineBusImageView)
+        
+        let busTextCentral = UILabel(frame: CGRectMake(12, lineBusImageView.frame.maxY + 16, self.mainViewWidth, 20))
+        busTextCentral.font = UIFont.fontAwesomeOfSize(16)
+        busTextCentral.text = String.fontAwesomeIconWithName(.Bus) + "  Saída do Prédio Central - 17:05"
+        self.busCard.addSubview(busTextCentral)
+        
+        let busTextPortao = UILabel(frame: CGRectMake(12, busTextCentral.frame.maxY + 8, self.mainViewWidth, 20))
+        busTextPortao.font = UIFont.fontAwesomeOfSize(16)
+        busTextPortao.text = String.fontAwesomeIconWithName(.Bus) + "  Portão de Acesso - 17:20"
+        self.busCard.addSubview(busTextPortao)
+        
+        let busTextBackCentral = UILabel(frame: CGRectMake(12, busTextPortao.frame.maxY + 8, self.mainViewWidth, 20))
+        busTextBackCentral.font = UIFont.fontAwesomeOfSize(16)
+        busTextBackCentral.text = String.fontAwesomeIconWithName(.Bus) + "  Chegada Prédio Central - 16:30"
+        self.busCard.addSubview(busTextBackCentral)
+    }
+    
+    //MARK:- Visual functions
     func drawCustomImage(size: CGSize) -> UIImage {
         // Setup our context
         let bounds = CGRect(origin: CGPoint.zero, size: size)
@@ -115,11 +173,17 @@ class HomeViewController: UIViewController {
         return image
     }
     
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-
+    func drawLineWithWidth(width: CGFloat, height: CGFloat, below view: UIView, paddingTop: Int? = 8) -> UIImageView {
+        let size = CGSize(width: width, height: height)
+        let frame = CGRectMake(view.frame.minX, view.frame.maxY + CGFloat(paddingTop!), width, height)
+        
+        let imageView = UIImageView(image: drawCustomImage(size))
+        imageView.frame = frame
+        
+        return imageView
     }
     
+    //MARK:- Helper functions
     func swapToMenuViewController() {
         self.tabBarController?.selectedIndex = 1
     }
