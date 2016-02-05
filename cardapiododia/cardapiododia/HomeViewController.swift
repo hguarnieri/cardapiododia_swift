@@ -119,6 +119,7 @@ class HomeViewController: UIViewController {
     func createBusCard() {
         self.busCard = UIView(frame: CGRectMake(0, menuCard.frame.maxY + 20, self.mainViewWidth, 150))
         self.busCard.backgroundColor = UIColor.whiteColor()
+        self.busCard.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "swapToBusTimesViewController"))
         
         let busTitle = UILabel(frame: CGRectMake(8, 16, self.view.frame.size.width - 8, 20))
         busTitle.text = "Horário de Ônibus - Interno"
@@ -186,6 +187,10 @@ class HomeViewController: UIViewController {
     //MARK:- Helper functions
     func swapToMenuViewController() {
         self.tabBarController?.selectedIndex = 1
+    }
+    
+    func swapToBusTimesViewController() {
+        self.tabBarController?.selectedIndex = 2
     }
     
     func openMenus() {

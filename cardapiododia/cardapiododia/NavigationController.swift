@@ -23,7 +23,13 @@ class NavigationController: UITabBarController {
         let menuIcon = UITabBarItem(title: "Cardápio", image: menuImage, selectedImage: menuImage)
         menuNavigationController.tabBarItem = menuIcon
         
+        let busTimesViewController = BusTimesViewController()
+        let busTimesNavigationController = UINavigationController(rootViewController: busTimesViewController)
+        let busTimesImage = UIImage.fontAwesomeIconWithName(.Bus, textColor: UIColor.blackColor(), size: CGSizeMake(30, 30))
+        let busTimesIcon = UITabBarItem(title: "Laranjinha", image: busTimesImage, selectedImage: busTimesImage)
+        busTimesNavigationController.tabBarItem = busTimesIcon
+        
         self.tabBar.tintColor = UIColor.redColor()
-        self.viewControllers = [homeViewController, menuNavigationController]
+        self.viewControllers = [homeViewController, menuNavigationController, busTimesNavigationController]
     }
 }
