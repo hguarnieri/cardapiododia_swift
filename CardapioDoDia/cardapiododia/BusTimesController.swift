@@ -34,4 +34,28 @@ class BusTimesController {
     
     let timetableTitles: [String] = ["Saída do Prédio Central", "Portão de Acesso", "Chegada ao Prédio Central"]
     let timetablePeriods: [String] = ["Período Letivo", "Férias"]
+    
+    func getNextTime(index: Int) -> String {
+        let date = NSDate()
+        
+        let formatter = NSDateFormatter()
+        formatter.dateFormat = "HH:mm"
+        formatter.timeZone = NSTimeZone(abbreviation: "ACST")
+        
+        let hourNow = formatter.stringFromDate(date)
+        
+        formatter.timeZone = NSTimeZone(abbreviation: "UTC")
+        
+        for timeString in self.timetable[index] {
+            let time = formatter.dateFromString(timeString)
+            let timeNow = formatter.dateFromString(hourNow)
+            
+            if time!.isGreaterThanDate(timeNow!) || time!.isEqualToDate(timeNow!) {
+                return timeString
+            }
+        }
+        
+        return self.timetable[index][0]
+    
+    }
 }

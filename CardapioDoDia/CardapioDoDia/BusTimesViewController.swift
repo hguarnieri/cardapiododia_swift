@@ -23,6 +23,8 @@ class BusTimesViewController: UIViewController, UITableViewDelegate, UITableView
     var width: CGFloat!
     
     override func viewDidLoad() {
+        BusTimes.getNextTime(0)
+        
         self.widthForSwipeView = self.view.frame.size.width * 0.7
         self.heightForSwipeView = self.view.frame.size.height * 0.7
         self.widthForCard = self.view.frame.size.width * 0.6
@@ -55,7 +57,7 @@ class BusTimesViewController: UIViewController, UITableViewDelegate, UITableView
         // Card creation
         let card = UIView(frame: CGRectMake(0, 0, self.widthForCard, self.heightForCard))
         card.backgroundColor = UIColor.whiteColor()
-        card.center.x = mainView.frame.width / 2
+        card.center.x = (mainView.frame.width / 2)
         
         // Rounded corners
         card.layer.cornerRadius = 8.0
@@ -104,9 +106,14 @@ class BusTimesViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     //MARK:- TableView functions
-    //TODO: Highlight next bus time
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("cell")! as UITableViewCell
+        
+        if BusTimes.timetable[tableView.tag][indexPath.row] == BusTimes.getNextTime(tableView.tag) {
+            cell.textLabel?.font = UIFont.boldSystemFontOfSize(16)
+        } else {
+            cell.textLabel?.font = UIFont.systemFontOfSize(16)
+        }
         
         cell.textLabel?.text = BusTimes.timetable[tableView.tag][indexPath.row]
         cell.textLabel?.textAlignment = NSTextAlignment.Center

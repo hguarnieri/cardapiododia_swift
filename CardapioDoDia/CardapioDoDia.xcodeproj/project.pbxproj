@@ -21,6 +21,7 @@
 		AE8FE68F1C5B78A50088CB39 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8FE68E1C5B78A50088CB39 /* HomeViewController.swift */; };
 		AE8FE6931C5B81F50088CB39 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8FE6921C5B81F50088CB39 /* NavigationController.swift */; };
 		BE012D231C6869950070026C /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE012D221C6869950070026C /* Utils.swift */; };
+		BE012D251C687E840070026C /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE012D241C687E840070026C /* DateExtension.swift */; };
 		BE30642A1C6468AF00C08233 /* BusTimesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3064291C6468AF00C08233 /* BusTimesViewController.swift */; };
 		BE30642C1C646D0800C08233 /* BusTimesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE30642B1C646D0800C08233 /* BusTimesController.swift */; };
 /* End PBXBuildFile section */
@@ -42,6 +43,7 @@
 		AE8FE68E1C5B78A50088CB39 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		AE8FE6921C5B81F50088CB39 /* NavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		BE012D221C6869950070026C /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		BE012D241C687E840070026C /* DateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		BE3064291C6468AF00C08233 /* BusTimesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BusTimesViewController.swift; path = CardapioDoDia/BusTimesViewController.swift; sourceTree = SOURCE_ROOT; };
 		BE30642B1C646D0800C08233 /* BusTimesController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BusTimesController.swift; sourceTree = "<group>"; };
 		D065CFE755236821E400D67C /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 				BE3064291C6468AF00C08233 /* BusTimesViewController.swift */,
 				BE30642B1C646D0800C08233 /* BusTimesController.swift */,
 				BE012D221C6869950070026C /* Utils.swift */,
+				BE012D241C687E840070026C /* DateExtension.swift */,
 			);
 			path = cardapiododia;
 			sourceTree = "<group>";
@@ -243,6 +246,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AE8FE68B1C5B62810088CB39 /* MenuController.swift in Sources */,
+				BE012D251C687E840070026C /* DateExtension.swift in Sources */,
 				AE8FE6931C5B81F50088CB39 /* NavigationController.swift in Sources */,
 				BE30642A1C6468AF00C08233 /* BusTimesViewController.swift in Sources */,
 				BE30642C1C646D0800C08233 /* BusTimesController.swift in Sources */,
