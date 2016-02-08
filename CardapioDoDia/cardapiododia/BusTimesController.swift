@@ -32,4 +32,6 @@ class BusTimesController {
         ["06:20", "06:55", "08:05", "11:35", "12:55", "14:05", "15:30", "16:30", "17:35",
             "18:15"]]
     
+    let timetableTitles: [String] = ["Saída do Prédio Central", "Portão de Acesso", "Chegada ao Prédio Central"]
+    let timetablePeriods: [String] = ["Período Letivo", "Férias"]
 }
