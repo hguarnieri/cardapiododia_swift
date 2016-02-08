@@ -47,8 +47,13 @@ class MenuViewController: UIViewController, SwipeViewDelegate, SwipeViewDataSour
         self.swipeView.delegate = self
         self.swipeView.dataSource = self
         
+        var segmentedSpacing: CGFloat = 45
+        if DeviceType.IS_IPHONE_5 {
+            segmentedSpacing = 35
+        }
+        
         self.segmentedControl = UISegmentedControl(items: ["Almoço", "Jantar"])
-        self.segmentedControl.frame = CGRectMake(self.view.frame.width / 2 - self.widthOfSwipeView / 2, self.swipeView.frame.minY - 45, self.widthOfSwipeView, 30)
+        self.segmentedControl.frame = CGRectMake(self.view.frame.width / 2 - self.widthOfSwipeView / 2, self.swipeView.frame.minY - segmentedSpacing, self.widthOfSwipeView, 30)
         self.segmentedControl.layer.cornerRadius = 5.0
         self.segmentedControl.selectedSegmentIndex = 0
         self.segmentedControl.backgroundColor = UIColor.whiteColor()
@@ -66,9 +71,7 @@ class MenuViewController: UIViewController, SwipeViewDelegate, SwipeViewDataSour
         })
         
         self.view.addSubview(mainView)
-    }
-    
-    override func viewDidAppear(animated: Bool) {
+        
         self.reloadData()
     }
     
@@ -98,7 +101,6 @@ class MenuViewController: UIViewController, SwipeViewDelegate, SwipeViewDataSour
         title.sizeToFit()
         title.center.x = menuCard.frame.size.width / 2
 
-        //TODO: When character "-" is in the string, don't show
         let imageMainChoice = getImageViewForImageNamed("mainChoice", below: title, margin: 8)
         let labelMainChoice = createLabelForText(menu.firstChoice, below: imageMainChoice)
         
@@ -136,7 +138,6 @@ class MenuViewController: UIViewController, SwipeViewDelegate, SwipeViewDataSour
         contentView.frame = CGRectMake(0, 0, menuCard.frame.width, labelDrink.frame.maxY)
         contentView.center.y = menuCard.frame.height / 2
         
-        //TODO: Centralize items
         menuCard.addSubview(contentView)
         mainView.addSubview(menuCard)
   

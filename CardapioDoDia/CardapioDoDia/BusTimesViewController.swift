@@ -36,7 +36,7 @@ class BusTimesViewController: UIViewController, UITableViewDelegate, UITableView
         
         self.contentView = UIView(frame: CGRectMake(0, 0, self.widthForSwipeView, self.heightForSwipeView))
         self.contentView.center.x = (self.view.frame.width / 2)
-        self.contentView.center.y = (self.view.frame.height / 2) + 20
+        self.contentView.center.y = (self.view.frame.height / 2) + 8
         
         self.swipeView = SwipeView(frame: CGRectMake(0, 0, self.widthForSwipeView, self.heightForSwipeView))
         self.swipeView.center.x = (self.contentView.frame.width / 2)
@@ -63,6 +63,7 @@ class BusTimesViewController: UIViewController, UITableViewDelegate, UITableView
         card.layer.cornerRadius = 8.0
         card.clipsToBounds = true
         
+        //TODO: Overflow of the title
         // Title
         let title = UILabel(frame: CGRectMake(8, 8, width, 20))
         title.font = UIFont.fontAwesomeOfSize(16)

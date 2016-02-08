@@ -28,8 +28,8 @@ class HomeViewController: UIViewController {
         self.title = "Inicio"
         self.mainViewWidth = self.view.frame.width
         
-        self.contentView = UIView(frame: CGRectMake(0, 0, mainViewWidth, 244))
-        self.contentView.center.y = (mainViewWidth / 2) + 212
+        self.contentView = UIView(frame: CGRectMake(0, 0, mainViewWidth, 260))
+        self.contentView.center.y = (self.view.frame.height / 2) + 80
         self.view.addSubview(contentView)
         
         // Creates the title view
@@ -66,27 +66,26 @@ class HomeViewController: UIViewController {
         imageViewHat.center.y = (self.titleView.frame.height / 2)
         self.titleView.addSubview(imageViewHat)
         
-        let title = UILabel(frame: CGRectMake(imageViewHat.frame.maxX + 16, imageViewHat.frame.minY + 4, 200, 22))
-        title.font = UIFont.systemFontOfSize(22)
+        let title = UILabel(frame: CGRectMake(imageViewHat.frame.maxX + 16, imageViewHat.frame.minY + 4, self.view.frame.width - imageViewHat.frame.maxX - 50, 100))
+        title.font = UIFont.systemFontOfSize(18)
         title.textColor = UIColor.whiteColor()
-        title.text = "CARDÁPIO DO DIA"
+        title.numberOfLines = 0
+        title.text = "CARDÁPIO DO DIA" + "\nCardápio e Laranjinha da FZEA na palma da sua mão!"
+        title.sizeToFit()
+        title.center.y = imageViewHat.center.y + 3
         self.titleView.addSubview(title)
-        
-        let description = UILabel(frame: CGRectMake(imageViewHat.frame.maxX + 16, title.frame.maxY + 5, 250, 40))
-        description.textColor = UIColor.whiteColor()
-        description.text = "Cardápio e Laranjinha da FZEA na palma da sua mão!"
-        description.numberOfLines = 0
-        description.sizeToFit()
-        self.titleView.addSubview(description)
     }
     
-    //TODO: Fix the static time
+    //TODO: Fix the date format for English
     func createDateView() {
         self.dateView = UIView(frame: CGRectMake(0, self.titleView.frame.maxY + 8, self.mainViewWidth, 30))
         self.dateView.backgroundColor = UIColor.redColor()
         
+        let formatter = NSDateFormatter()
+        formatter.dateFormat = "EEEE, dd 'de' MMMM 'de' y"
+        
         let date = UILabel(frame: CGRectMake(8, 0, self.mainViewWidth, 20))
-        date.text = "Quarta-Feira, 06 de agosto de 2014"
+        date.text = formatter.stringFromDate(NSDate())
         date.textColor = UIColor.whiteColor()
         date.center.y = (dateView.frame.height / 2)
         
@@ -115,7 +114,6 @@ class HomeViewController: UIViewController {
         self.menuCard.addSubview(lineDinner)
     }
     
-    //TODO: Fix static time
     func createBusCard() {
         self.busCard = UIView(frame: CGRectMake(0, menuCard.frame.maxY + 20, self.mainViewWidth, 150))
         self.busCard.backgroundColor = UIColor.whiteColor()
@@ -132,17 +130,17 @@ class HomeViewController: UIViewController {
         
         let busTextCentral = UILabel(frame: CGRectMake(12, lineBusImageView.frame.maxY + 16, self.mainViewWidth, 20))
         busTextCentral.font = UIFont.fontAwesomeOfSize(16)
-        busTextCentral.text = String.fontAwesomeIconWithName(.Bus) + "  Saída do Prédio Central - 17:05"
+        busTextCentral.text = String.fontAwesomeIconWithName(.Bus) + "  Saída do Prédio Central - \(BusTimes.getNextTime(0))"
         self.busCard.addSubview(busTextCentral)
         
         let busTextPortao = UILabel(frame: CGRectMake(12, busTextCentral.frame.maxY + 8, self.mainViewWidth, 20))
         busTextPortao.font = UIFont.fontAwesomeOfSize(16)
-        busTextPortao.text = String.fontAwesomeIconWithName(.Bus) + "  Portão de Acesso - 17:20"
+        busTextPortao.text = String.fontAwesomeIconWithName(.Bus) + "  Portão de Acesso - \(BusTimes.getNextTime(1))"
         self.busCard.addSubview(busTextPortao)
         
         let busTextBackCentral = UILabel(frame: CGRectMake(12, busTextPortao.frame.maxY + 8, self.mainViewWidth, 20))
         busTextBackCentral.font = UIFont.fontAwesomeOfSize(16)
-        busTextBackCentral.text = String.fontAwesomeIconWithName(.Bus) + "  Chegada Prédio Central - 16:30"
+        busTextBackCentral.text = String.fontAwesomeIconWithName(.Bus) + "  Chegada Prédio Central - \(BusTimes.getNextTime(2))"
         self.busCard.addSubview(busTextBackCentral)
     }
     
