@@ -92,6 +92,10 @@
 		AE32EE381C4E105400C6F491 /* cardapiododia */ = {
 			isa = PBXGroup;
 			children = (
+				BE862A2F1C69F64900AA79FE /* Models */,
+				BE862A2E1C69F63F00AA79FE /* Controllers */,
+				BE862A2D1C69F62D00AA79FE /* ViewControllers */,
+				BE862A2C1C69F60D00AA79FE /* Helpers */,
 				AE32EE391C4E105400C6F491 /* AppDelegate.swift */,
 				AE32EE3D1C4E105400C6F491 /* Main.storyboard */,
 				AE32EE431C4E105400C6F491 /* Assets.xcassets */,
@@ -99,18 +103,46 @@
 				AE32EE451C4E105400C6F491 /* LaunchScreen.storyboard */,
 				AE32EE481C4E105400C6F491 /* Info.plist */,
 				AE32EE401C4E105400C6F491 /* cardapiododia.xcdatamodeld */,
+			);
+			path = cardapiododia;
+			sourceTree = "<group>";
+		};
+		BE862A2C1C69F60D00AA79FE /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				BE012D241C687E840070026C /* DateExtension.swift */,
 				AE8FE6881C5B5DC50088CB39 /* IphoneVersioning.swift */,
-				AE8FE68A1C5B62810088CB39 /* MenuController.swift */,
-				AE8FE68C1C5B62CF0088CB39 /* MenuModel.swift */,
+				BE012D221C6869950070026C /* Utils.swift */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
+		BE862A2D1C69F62D00AA79FE /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
 				AE8FE6921C5B81F50088CB39 /* NavigationController.swift */,
 				AE8FE68E1C5B78A50088CB39 /* HomeViewController.swift */,
 				AE32EE3B1C4E105400C6F491 /* MenuViewController.swift */,
 				BE3064291C6468AF00C08233 /* BusTimesViewController.swift */,
-				BE30642B1C646D0800C08233 /* BusTimesController.swift */,
-				BE012D221C6869950070026C /* Utils.swift */,
-				BE012D241C687E840070026C /* DateExtension.swift */,
 			);
-			path = cardapiododia;
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		BE862A2E1C69F63F00AA79FE /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				AE8FE68A1C5B62810088CB39 /* MenuController.swift */,
+				BE30642B1C646D0800C08233 /* BusTimesController.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		BE862A2F1C69F64900AA79FE /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				AE8FE68C1C5B62CF0088CB39 /* MenuModel.swift */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 		BEB4EC12F5E29D839F264555 /* Frameworks */ = {

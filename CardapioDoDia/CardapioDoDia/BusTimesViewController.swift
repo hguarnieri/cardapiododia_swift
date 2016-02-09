@@ -25,9 +25,9 @@ class BusTimesViewController: UIViewController, UITableViewDelegate, UITableView
     override func viewDidLoad() {
         BusTimes.getNextTime(0)
         
-        self.widthForSwipeView = self.view.frame.size.width * 0.7
+        self.widthForSwipeView = self.view.frame.size.width * 0.70
         self.heightForSwipeView = self.view.frame.size.height * 0.7
-        self.widthForCard = self.view.frame.size.width * 0.6
+        self.widthForCard = self.view.frame.size.width * 0.65
         self.heightForCard = self.view.frame.size.height * 0.7
         self.width = self.view.frame.width
         
@@ -63,10 +63,9 @@ class BusTimesViewController: UIViewController, UITableViewDelegate, UITableView
         card.layer.cornerRadius = 8.0
         card.clipsToBounds = true
         
-        //TODO: Overflow of the title
         // Title
         let title = UILabel(frame: CGRectMake(8, 8, width, 20))
-        title.font = UIFont.fontAwesomeOfSize(16)
+        title.font = UIFont.fontAwesomeOfSize(15)
         title.text = "\(String.fontAwesomeIconWithName(.ClockO)) \(BusTimes.timetableTitles[index % 3])"
         
         let line = drawLineWithWidth(card.frame.width - 8, height: 1, below: title)
