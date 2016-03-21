@@ -11,134 +11,158 @@ import SwipeView
 import SVProgressHUD
 import FontAwesome_swift
 
-class MenuViewController: UIViewController, SwipeViewDelegate, SwipeViewDataSource {
+class MenuViewController: UIViewController, SwipeViewDelegate, SwipeViewDataSource, UITableViewDelegate, UITableViewDataSource {
     
-    var swipeView: SwipeView!
+    var contentView: UIView!
     var segmentedControl: UISegmentedControl!
+    var swipeView: SwipeView!
     
-    var widthOfSwipeView: CGFloat!
-    var heightOfSwipeView: CGFloat!
-    var widthOfCard: CGFloat!
-    var heightOfCard: CGFloat!
+    var widthForSwipeView: CGFloat!
+    var heightForSwipeView: CGFloat!
+    var widthForCard: CGFloat!
+    var heightForCard: CGFloat!
+    var width: CGFloat!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.title = "Cardápio"
+        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "background")!)
         
+        self.createRefreshButton()
+
+        self.widthForSwipeView = self.view.frame.width * 0.70
+        self.heightForSwipeView = self.view.frame.height * 0.7
+        self.widthForCard = self.view.frame.width * 0.6
+        self.heightForCard = self.view.frame.height * 0.65
+        self.width = self.view.frame.width
+        
+        // Creates the view to centralize the content
+        self.createContentView()
+        
+        // Creates the segmented control
+        self.createSegmentedControl()
+        self.contentView.addSubview(self.segmentedControl)
+        
+        // Creates the swipe view
+        self.createSwipeView()
+        self.contentView.addSubview(self.swipeView)
+        
+        // Create the notification observer
+        self.createNotificationCenterObserver()
+        
+        self.view.addSubview(self.contentView)
+        self.reloadData()
+    }
+    
+    //MARK:- Visual functions
+    func createRefreshButton() {
         let attributes = [NSFontAttributeName: UIFont.fontAwesomeOfSize(20)] as Dictionary!
         let button = UIBarButtonItem(title: "", style: .Plain, target: self, action: "reloadData")
         button.setTitleTextAttributes(attributes, forState: .Normal)
         button.title = String.fontAwesomeIconWithName(.Repeat)
         button.tintColor = UIColor.redColor()
         self.navigationItem.rightBarButtonItem = button
-
-        self.widthOfSwipeView = self.view.frame.size.width * 0.7
-        self.heightOfSwipeView = self.view.frame.size.height * 0.7
-        self.widthOfCard = self.view.frame.size.width * 0.6
-        self.heightOfCard = self.view.frame.size.height * 0.7
-
-        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "background")!)
+    }
     
-        self.swipeView = SwipeView(frame: CGRectMake(0, 0, self.widthOfSwipeView, self.heightOfSwipeView))
-        self.swipeView.center.x = (self.view.frame.size.width / 2)
-        self.swipeView.center.y = (self.view.frame.size.height / 2) - 44
+    func createContentView() {
+        self.contentView = UIView(frame: CGRectMake(0, 0, self.widthForSwipeView, self.heightForSwipeView))
+        self.contentView.center.x = (self.view.frame.width / 2)
+        self.contentView.center.y = (self.view.frame.height / 2) + 8
+    }
+    
+    func createSwipeView() {
+        self.swipeView = SwipeView(frame: CGRectMake(0, self.segmentedControl.frame.height + 8, self.widthForSwipeView, self.heightForSwipeView))
         self.swipeView.itemsPerPage = 1
         self.swipeView.delegate = self
         self.swipeView.dataSource = self
-        
-        var segmentedSpacing: CGFloat = 45
-        if DeviceType.IS_IPHONE_5 {
-            segmentedSpacing = 35
-        }
-        
+    }
+    
+    func createSegmentedControl() {
         self.segmentedControl = UISegmentedControl(items: ["Almoço", "Jantar"])
-        self.segmentedControl.frame = CGRectMake(self.view.frame.width / 2 - self.widthOfSwipeView / 2, self.swipeView.frame.minY - segmentedSpacing, self.widthOfSwipeView, 30)
+        self.segmentedControl.frame = CGRectMake(0, 0, self.widthForSwipeView, 28)
         self.segmentedControl.layer.cornerRadius = 5.0
         self.segmentedControl.selectedSegmentIndex = 0
         self.segmentedControl.backgroundColor = UIColor.whiteColor()
         self.segmentedControl.tintColor = UIColor.redColor()
         self.segmentedControl.addTarget(self, action: Selector("segmentedControlChanged"), forControlEvents: UIControlEvents.ValueChanged)
-        
-        let mainView = UIView(frame: CGRectMake(0, 0, self.view.frame.width, self.swipeView.frame.maxY))
-        
-        mainView.addSubview(self.segmentedControl)
-        mainView.addSubview(self.swipeView)
-        mainView.center.y = self.view.frame.height / 2
-        
+    }
+    
+    //MARK:- Observers
+    func createNotificationCenterObserver() {
         NSNotificationCenter.defaultCenter().addObserverForName(Menu.RELOAD_STRING, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: { notification in
             self.swipeView.reloadData()
         })
-        
-        self.view.addSubview(mainView)
-        
-        self.reloadData()
     }
     
     func swipeView(swipeView: SwipeView!, viewForItemAtIndex index: Int, reusingView view: UIView!) -> UIView! {
-        let mainView = UIView(frame: CGRectMake(0, 0, self.widthOfSwipeView, self.heightOfSwipeView))
+        let mainView = UIView(frame: CGRectMake(0, 0, self.widthForSwipeView, self.heightForSwipeView))
         
-        //TODO: Implement offline connection handler
-        var type = 0
-        if segmentedControl.selectedSegmentIndex == 1 {
-            type = 4
-        }
-        
-        var menu = MenuItem()
-        if let menus = Menu.menus {
-            menu = menus[index + type]
-        }
-        
-        let menuCard = UIView(frame: CGRectMake(0, 0, self.widthOfCard, self.heightOfCard))
+        let menuCard = UIView(frame: CGRectMake(0, 0, self.widthForCard, self.heightForCard))
         menuCard.center.x = mainView.center.x
         menuCard.backgroundColor = UIColor.whiteColor()
         menuCard.layer.cornerRadius = 8.0
         menuCard.clipsToBounds = true
         
-        let title = UILabel(frame: CGRectMake(0, 8, 0, 0))
-        title.font = UIFont.boldSystemFontOfSize(17)
-        title.text = dayOfWeek(index)
-        title.sizeToFit()
-        title.center.x = menuCard.frame.size.width / 2
-
-        let imageMainChoice = getImageViewForImageNamed("mainChoice", below: title, margin: 8)
-        let labelMainChoice = createLabelForText(menu.firstChoice, below: imageMainChoice)
+        var type = 0
+        if self.segmentedControl.selectedSegmentIndex == 1 {
+            type = 4
+        }
         
-        let imageSecondChoice = getImageViewForImageNamed("secondChoice", below: labelMainChoice)
-        let labelSecondChoice = createLabelForText(menu.secondChoice, below: imageSecondChoice)
+        let tableView = UITableView(frame: CGRectMake(0, 8, self.widthForCard, self.heightForCard))
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.separatorStyle = UITableViewCellSeparatorStyle.None
+        tableView.tag = index + type
+        menuCard.addSubview(tableView)
         
-        let imageComplementary = getImageViewForImageNamed("complementary", below: labelSecondChoice)
-        let labelComplementary = createLabelForText(menu.complementary, below: imageComplementary)
+        tableView.reloadData()
         
-        let imageSalad = getImageViewForImageNamed("salad", below: labelComplementary)
-        let labelSalad = createLabelForText(menu.salad, below: imageSalad)
-        
-        let imageDesert = getImageViewForImageNamed("desert", below: labelSalad)
-        let labelDesert = createLabelForText(menu.desert, below: imageDesert)
-        
-        let imageDrink = getImageViewForImageNamed("drink", below: labelDesert)
-        let labelDrink = createLabelForText(menu.drink, below: imageDrink)
-
-        let contentView = UIView()
-        
-        contentView.addSubview(title)
-        contentView.addSubview(imageMainChoice)
-        contentView.addSubview(labelMainChoice)
-        contentView.addSubview(imageSecondChoice)
-        contentView.addSubview(labelSecondChoice)
-        contentView.addSubview(imageComplementary)
-        contentView.addSubview(labelComplementary)
-        contentView.addSubview(imageSalad)
-        contentView.addSubview(labelSalad)
-        contentView.addSubview(imageDesert)
-        contentView.addSubview(labelDesert)
-        contentView.addSubview(imageDrink)
-        contentView.addSubview(labelDrink)
-        
-        contentView.frame = CGRectMake(0, 0, menuCard.frame.width, labelDrink.frame.maxY)
-        contentView.center.y = menuCard.frame.height / 2
-        
-        menuCard.addSubview(contentView)
+//        let title = UILabel(frame: CGRectMake(0, 8, 0, 0))
+//        title.font = UIFont.boldSystemFontOfSize(17)
+//        title.text = dayOfWeek(index)
+//        title.sizeToFit()
+//        title.center.x = menuCard.frame.size.width / 2
+//
+//        let imageMainChoice = getImageViewForImageNamed("mainChoice", below: title, margin: 8)
+//        let labelMainChoice = createLabelForText(menu.firstChoice, below: imageMainChoice)
+//        
+//        let imageSecondChoice = getImageViewForImageNamed("secondChoice", below: labelMainChoice)
+//        let labelSecondChoice = createLabelForText(menu.secondChoice, below: imageSecondChoice)
+//        
+//        let imageComplementary = getImageViewForImageNamed("complementary", below: labelSecondChoice)
+//        let labelComplementary = createLabelForText(menu.complementary, below: imageComplementary)
+//        
+//        let imageSalad = getImageViewForImageNamed("salad", below: labelComplementary)
+//        let labelSalad = createLabelForText(menu.salad, below: imageSalad)
+//        
+//        let imageDesert = getImageViewForImageNamed("desert", below: labelSalad)
+//        let labelDesert = createLabelForText(menu.desert, below: imageDesert)
+//        
+//        let imageDrink = getImageViewForImageNamed("drink", below: labelDesert)
+//        let labelDrink = createLabelForText(menu.drink, below: imageDrink)
+//
+//        let contentView = UIView()
+//        
+//        contentView.addSubview(title)
+//        contentView.addSubview(imageMainChoice)
+//        contentView.addSubview(labelMainChoice)
+//        contentView.addSubview(imageSecondChoice)
+//        contentView.addSubview(labelSecondChoice)
+//        contentView.addSubview(imageComplementary)
+//        contentView.addSubview(labelComplementary)
+//        contentView.addSubview(imageSalad)
+//        contentView.addSubview(labelSalad)
+//        contentView.addSubview(imageDesert)
+//        contentView.addSubview(labelDesert)
+//        contentView.addSubview(imageDrink)
+//        contentView.addSubview(labelDrink)
+//        
+//        contentView.frame = CGRectMake(0, 0, menuCard.frame.width, labelDrink.frame.maxY)
+//        contentView.center.y = menuCard.frame.height / 2
+//        
+//        menuCard.addSubview(contentView)
         mainView.addSubview(menuCard)
   
         return mainView
@@ -152,28 +176,83 @@ class MenuViewController: UIViewController, SwipeViewDelegate, SwipeViewDataSour
         }
     }
     
+    //MARK:- TableView functions
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 6
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("cell")! as UITableViewCell
+        
+        for s in cell.contentView.subviews {
+            s.removeFromSuperview()
+        }
+        
+        var icon: UIImageView!
+        let label = UILabel()
+        var text: String!
+        
+        switch (indexPath.row) {
+        case 0:
+            text = Menu.menus[tableView.tag].firstChoice
+            icon = getImageViewForImageNamed("mainChoice")
+        case 1:
+            text = Menu.menus[tableView.tag].secondChoice
+            icon = getImageViewForImageNamed("secondChoice")
+        case 2:
+            text = Menu.menus[tableView.tag].complementary
+            icon = getImageViewForImageNamed("complementary")
+        case 3:
+            text = Menu.menus[tableView.tag].salad
+            icon = getImageViewForImageNamed("salad")
+        case 4:
+            text = Menu.menus[tableView.tag].desert
+            icon = getImageViewForImageNamed("desert")
+        case 5:
+            text = Menu.menus[tableView.tag].drink
+            icon = getImageViewForImageNamed("drink")
+        default:
+            text = ""
+        }
+        
+        icon.frame = CGRectMake(0, 8, 30, 30)
+        icon.center.x = (self.widthForCard / 2)
+        
+        label.frame = CGRectMake(6, icon.frame.maxY + 4, self.widthForCard - 12, 20)
+        label.textAlignment = NSTextAlignment.Center
+        label.font = UIFont.systemFontOfSize(15)
+        
+        if text == "-" {
+            label.text = "Não Informado"
+        } else {
+            label.text = text
+        }
+        
+        cell.contentView.addSubview(label)
+        cell.contentView.addSubview(icon)
+        
+        return cell
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 70
+    }
+    
     //MARK:- Views creation functions
-    func getImageViewForImageNamed(name: String, below: UIView, margin: Int? = 4) -> UIImageView {
+    func getImageViewForImageNamed(name: String) -> UIImageView {
         let image = UIImage(named: name)
         let imageView = UIImageView(image: image)
         imageView.image = (imageView.image?.imageWithRenderingMode(.AlwaysTemplate))!
-        
-        if DeviceType.IS_IPHONE_4_OR_LESS {
-            imageView.frame = CGRectMake(0, 0, 25, 25)
-        } else if DeviceType.IS_IPHONE_6P {
-            imageView.frame = CGRectMake(0, 0, 35, 35)
-        } else {
-            imageView.frame = CGRectMake(0, 0, 30, 30)
-        }
-        
         imageView.tintColor = UIColor.redColor()
-        imageView.frame.origin.y = below.frame.maxY + CGFloat(margin!)
-        imageView.center.x = below.center.x
         
         return imageView
     }
     
-    func createLabelForText(text: String, below: UIView, margin: Int? = 4) -> UILabel {
+    func createLabelForText(text: String) -> UILabel {
         let label = UILabel()
         
         if DeviceType.IS_IPHONE_4_OR_LESS {
@@ -185,11 +264,8 @@ class MenuViewController: UIViewController, SwipeViewDelegate, SwipeViewDataSour
         label.text = text
         label.numberOfLines = 0
         label.textAlignment = NSTextAlignment.Center
-        label.frame.size.width = self.widthOfCard - 8
+        label.frame.size.width = self.widthForCard
         label.sizeToFit()
-        
-        label.frame.origin.y = below.frame.maxY + CGFloat(margin!)
-        label.center.x = below.center.x
         
         return label
     }
