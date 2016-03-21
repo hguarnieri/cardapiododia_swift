@@ -79,6 +79,10 @@ class BusTimesViewController: UIViewController, UITableViewDelegate, UITableView
         // Period of the calendar
         let subTitle = UILabel(frame: CGRectMake(8, days.frame.maxY + 8, 0, 0))
         subTitle.text = "\(BusTimes.timetablePeriods[index / 3])"
+        if (index / 3) == 1 { // This is done to help the users to see where they are
+            subTitle.font = UIFont.boldSystemFontOfSize(16)
+            subTitle.textColor = UIColor.redColor()
+        }
         subTitle.sizeToFit()
         subTitle.center.x = (card.frame.width / 2)
         
