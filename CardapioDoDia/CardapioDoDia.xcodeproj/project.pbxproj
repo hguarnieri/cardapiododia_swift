@@ -188,11 +188,11 @@
 				TargetAttributes = {
 					AE32EE351C4E105400C6F491 = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = 58E5F8DYED;
+						DevelopmentTeam = 8FDT2A97L9;
 					};
 				};
 			};
-			buildConfigurationList = AE32EE311C4E105400C6F491 /* Build configuration list for PBXProject "cardapiododia" */;
+			buildConfigurationList = AE32EE311C4E105400C6F491 /* Build configuration list for PBXProject "CardapioDoDia" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -406,7 +406,7 @@
 				INFOPLIST_FILE = cardapiododia/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.hguarnieri.cardapiododia;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hguarnieri.cardapio;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 			};
@@ -421,7 +421,7 @@
 				INFOPLIST_FILE = cardapiododia/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.hguarnieri.cardapiododia;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hguarnieri.cardapio;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 			};
@@ -430,7 +430,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		AE32EE311C4E105400C6F491 /* Build configuration list for PBXProject "cardapiododia" */ = {
+		AE32EE311C4E105400C6F491 /* Build configuration list for PBXProject "CardapioDoDia" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AE32EE491C4E105400C6F491 /* Debug */,

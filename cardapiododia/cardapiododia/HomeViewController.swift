@@ -10,9 +10,7 @@ import Foundation
 import UIKit
 import FontAwesome_swift
 
-class HomeViewController: UIViewController {
-    
-    var menuViewController: MenuViewController?
+class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var mainViewWidth: CGFloat!
     
@@ -22,14 +20,24 @@ class HomeViewController: UIViewController {
     var menuCard: UIView!
     var busCard: UIView!
     
+    var menuTableView: UITableView!
+    var busTableView: UITableView!
+    
     override func viewDidLoad() {
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "background")!)
         
         self.title = "Inicio"
         self.mainViewWidth = self.view.frame.width
         
-        self.contentView = UIView(frame: CGRectMake(0, 0, mainViewWidth, 260))
-        self.contentView.center.y = (self.view.frame.height / 2) + 80
+        self.contentView = UIView(frame: CGRectMake(0, 0, mainViewWidth, 312))
+        
+        //TODO: Improve this
+        if DeviceType.IS_IPHONE_4_OR_LESS {
+            self.contentView.center.y = (self.view.frame.height / 2) + 20
+        } else {
+            self.contentView.center.y = (self.view.frame.height / 2) + 80
+        }
+        
         self.view.addSubview(contentView)
         
         // Creates the title view
@@ -41,11 +49,11 @@ class HomeViewController: UIViewController {
         self.view.addSubview(self.dateView)
         
         // Creates the menu card
-        self.createMenuCard()
+        self.createMenuTableView()
         contentView.addSubview(self.menuCard)
         
         // Creates the bus card
-        self.createBusCard()
+        self.createBusTableView()
         contentView.addSubview(self.busCard)
     }
     
@@ -55,25 +63,30 @@ class HomeViewController: UIViewController {
     
     //MARK:- View creation functions
     func createTitleView() {
-        self.titleView = UIView(frame: CGRectMake(0, 44, mainViewWidth, 120))
-        self.titleView.backgroundColor = UIColor.redColor()
+        if DeviceType.IS_IPHONE_4_OR_LESS {
+            self.titleView = UIView(frame: CGRectMake(0, 44, mainViewWidth, 0))
+        } else {
+            self.titleView = UIView(frame: CGRectMake(0, 44, mainViewWidth, 120))
+            self.titleView.backgroundColor = UIColor.redColor()
+            
+            let imageHat = UIImage(named: "chefsHat")
+            let imageViewHat = UIImageView(image: imageHat)
+            imageViewHat.image = (imageViewHat.image?.imageWithRenderingMode(.AlwaysTemplate))!
+            imageViewHat.tintColor = UIColor.whiteColor()
+            imageViewHat.frame = CGRectMake(16, 0, 70, 70)
+            imageViewHat.center.y = (self.titleView.frame.height / 2)
+            self.titleView.addSubview(imageViewHat)
+            
+            let title = UILabel(frame: CGRectMake(imageViewHat.frame.maxX + 16, imageViewHat.frame.minY + 4, self.view.frame.width - imageViewHat.frame.maxX - 50, 100))
+            title.font = UIFont.systemFontOfSize(18)
+            title.textColor = UIColor.whiteColor()
+            title.numberOfLines = 0
+            title.text = "CARDÁPIO DO DIA" + "\nCardápio e Laranjinha da FZEA na palma da sua mão!"
+            title.sizeToFit()
+            title.center.y = imageViewHat.center.y + 3
+            self.titleView.addSubview(title)
+        }
         
-        let imageHat = UIImage(named: "chefsHat")
-        let imageViewHat = UIImageView(image: imageHat)
-        imageViewHat.image = (imageViewHat.image?.imageWithRenderingMode(.AlwaysTemplate))!
-        imageViewHat.tintColor = UIColor.whiteColor()
-        imageViewHat.frame = CGRectMake(16, 0, 70, 70)
-        imageViewHat.center.y = (self.titleView.frame.height / 2)
-        self.titleView.addSubview(imageViewHat)
-        
-        let title = UILabel(frame: CGRectMake(imageViewHat.frame.maxX + 16, imageViewHat.frame.minY + 4, self.view.frame.width - imageViewHat.frame.maxX - 50, 100))
-        title.font = UIFont.systemFontOfSize(18)
-        title.textColor = UIColor.whiteColor()
-        title.numberOfLines = 0
-        title.text = "CARDÁPIO DO DIA" + "\nCardápio e Laranjinha da FZEA na palma da sua mão!"
-        title.sizeToFit()
-        title.center.y = imageViewHat.center.y + 3
-        self.titleView.addSubview(title)
     }
     
     //TODO: Fix the date format for English
@@ -114,6 +127,19 @@ class HomeViewController: UIViewController {
         self.menuCard.addSubview(lineDinner)
     }
     
+    func createMenuTableView() {
+        self.menuCard = UIView(frame: CGRectMake(0, 0, self.mainViewWidth, 135))
+        self.menuCard.backgroundColor = UIColor.whiteColor()
+        self.menuCard.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "swapToMenuViewController"))
+        
+        self.menuTableView = UITableView(frame: CGRectMake(0, 0, self.mainViewWidth, 135))
+        self.menuTableView.delegate = self
+        self.menuTableView.dataSource = self
+        self.menuTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        
+        self.menuCard.addSubview(self.menuTableView)
+    }
+    
     func createBusCard() {
         self.busCard = UIView(frame: CGRectMake(0, menuCard.frame.maxY + 20, self.mainViewWidth, 150))
         self.busCard.backgroundColor = UIColor.whiteColor()
@@ -144,6 +170,19 @@ class HomeViewController: UIViewController {
         self.busCard.addSubview(busTextBackCentral)
     }
     
+    func createBusTableView() {
+        self.busCard = UIView(frame: CGRectMake(0, menuCard.frame.maxY + 8, self.mainViewWidth, 150))
+        self.busCard.backgroundColor = UIColor.whiteColor()
+        self.busCard.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "swapToBusTimesViewController"))
+        
+        self.busTableView = UITableView(frame: CGRectMake(0, 0, self.mainViewWidth, 170))
+        self.busTableView.delegate = self
+        self.busTableView.dataSource = self
+        self.busTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        
+        self.busCard.addSubview(self.busTableView)
+    }
+    
     //MARK:- Helper functions
     func swapToMenuViewController() {
         self.tabBarController?.selectedIndex = 1
@@ -153,11 +192,80 @@ class HomeViewController: UIViewController {
         self.tabBarController?.selectedIndex = 2
     }
     
-    func openMenus() {
-        if menuViewController == nil {
-            self.menuViewController = MenuViewController()
+    //MARK:- TableView functions
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if tableView == self.menuTableView {
+            return 2
+        } else {
+            return 3
+        }
+    }
+    
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 40
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("cell")! as UITableViewCell
+        cell.textLabel?.font = UIFont.fontAwesomeOfSize(16)
+        
+        var text: String!
+        
+        if tableView == self.menuTableView {
+            switch (indexPath.row) {
+            case 0:
+                text = "Almoço - \(Menu.lunchStartingTime) às \(Menu.lunchEndingTime) " + String.fontAwesomeIconWithName(.ClockO)
+            case 1:
+                text = "Jantar - \(Menu.dinnerStartingTime) às \(Menu.dinnerEndingTime) " + String.fontAwesomeIconWithName(.ClockO)
+            default:
+                text = ""
+            }
+        } else {
+            switch (indexPath.row) {
+            case 0:
+                text = String.fontAwesomeIconWithName(.Bus) + "  Saída do Prédio Central - \(BusTimes.getNextTime(0))"
+            case 1:
+                text = String.fontAwesomeIconWithName(.Bus) + "  Portão de Acesso - \(BusTimes.getNextTime(1))"
+            case 2:
+                text = String.fontAwesomeIconWithName(.Bus) + "  Chegada Prédio Central - \(BusTimes.getNextTime(2))"
+            default:
+                text = ""
+            }
         }
         
-        self.navigationController?.showViewController(self.menuViewController!, sender: self)
+        cell.textLabel?.text = text
+        
+        return cell
+    }
+    
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let view = UIView(frame: CGRectMake(0, 0, self.mainViewWidth, 40))
+        
+        view.backgroundColor = UIColor.whiteColor()
+        
+        let title = UILabel(frame: CGRectMake(8, 10, self.view.frame.size.width - 8, 20))
+        
+        if tableView == self.menuTableView {
+            title.text = "Horário do Restaurante Universitário"
+        } else {
+            title.text = "Horário do Ônibus Interno"
+        }
+        
+        view.addSubview(title)
+        
+        let lineBus = drawCustomImage(CGSize(width: self.mainViewWidth, height: 1))
+        let lineBusImageView = UIImageView(image: lineBus)
+        lineBusImageView.frame = CGRectMake(8, title.frame.maxY + 8, self.mainViewWidth - 16, 1)
+        view.addSubview(lineBusImageView)
+        
+        return view
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if tableView == self.menuTableView {
+            self.swapToMenuViewController()
+        } else {
+            self.swapToBusTimesViewController()
+        }
     }
 }

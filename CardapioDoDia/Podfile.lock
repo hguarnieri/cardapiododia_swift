@@ -2,7 +2,6 @@ PODS:
   - Alamofire (3.1.5)
   - Device.swift (0.3.1)
   - FontAwesome.swift (0.7.0)
-  - PocketSVG (0.7)
   - SVProgressHUD (1.1.3)
   - SwipeView (1.3.2)
 
@@ -10,7 +9,6 @@ DEPENDENCIES:
   - Alamofire (~> 3.0)
   - Device.swift
   - FontAwesome.swift
-  - PocketSVG (~> 0.7)
   - SVProgressHUD
   - SwipeView (~> 1.3)
 
@@ -18,7 +16,6 @@ SPEC CHECKSUMS:
   Alamofire: 5f730ba29fd113b7ddd71c1e65d0c630acf5d7b0
   Device.swift: d396648eebcfc424944acfdb7391817e4bdec4e9
   FontAwesome.swift: c6e30a1a81716306ff9c81f2d38dda88ac5b8294
-  PocketSVG: e05e6b008c6232d7b6410bb1ff34db71957b776d
   SVProgressHUD: 748080e4f36e603f6c02aec292664239df5279c1
   SwipeView: bd67cfaf7760c036438446b3ccb28a3b84fce009
 
