@@ -106,10 +106,10 @@ class MenuViewController: UIViewController, SwipeViewDelegate, SwipeViewDataSour
         
         var type = 0
         if self.segmentedControl.selectedSegmentIndex == 1 {
-            type = 4
+            type = 5
         }
         
-        let tableView = UITableView(frame: CGRectMake(0, 8, self.widthForCard, self.heightForCard))
+        let tableView = UITableView(frame: CGRectMake(0, 8, self.widthForCard, self.heightForCard - 15))
         tableView.delegate = self
         tableView.dataSource = self
         tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
@@ -119,50 +119,6 @@ class MenuViewController: UIViewController, SwipeViewDelegate, SwipeViewDataSour
         
         tableView.reloadData()
         
-//        let title = UILabel(frame: CGRectMake(0, 8, 0, 0))
-//        title.font = UIFont.boldSystemFontOfSize(17)
-//        title.text = dayOfWeek(index)
-//        title.sizeToFit()
-//        title.center.x = menuCard.frame.size.width / 2
-//
-//        let imageMainChoice = getImageViewForImageNamed("mainChoice", below: title, margin: 8)
-//        let labelMainChoice = createLabelForText(menu.firstChoice, below: imageMainChoice)
-//        
-//        let imageSecondChoice = getImageViewForImageNamed("secondChoice", below: labelMainChoice)
-//        let labelSecondChoice = createLabelForText(menu.secondChoice, below: imageSecondChoice)
-//        
-//        let imageComplementary = getImageViewForImageNamed("complementary", below: labelSecondChoice)
-//        let labelComplementary = createLabelForText(menu.complementary, below: imageComplementary)
-//        
-//        let imageSalad = getImageViewForImageNamed("salad", below: labelComplementary)
-//        let labelSalad = createLabelForText(menu.salad, below: imageSalad)
-//        
-//        let imageDesert = getImageViewForImageNamed("desert", below: labelSalad)
-//        let labelDesert = createLabelForText(menu.desert, below: imageDesert)
-//        
-//        let imageDrink = getImageViewForImageNamed("drink", below: labelDesert)
-//        let labelDrink = createLabelForText(menu.drink, below: imageDrink)
-//
-//        let contentView = UIView()
-//        
-//        contentView.addSubview(title)
-//        contentView.addSubview(imageMainChoice)
-//        contentView.addSubview(labelMainChoice)
-//        contentView.addSubview(imageSecondChoice)
-//        contentView.addSubview(labelSecondChoice)
-//        contentView.addSubview(imageComplementary)
-//        contentView.addSubview(labelComplementary)
-//        contentView.addSubview(imageSalad)
-//        contentView.addSubview(labelSalad)
-//        contentView.addSubview(imageDesert)
-//        contentView.addSubview(labelDesert)
-//        contentView.addSubview(imageDrink)
-//        contentView.addSubview(labelDrink)
-//        
-//        contentView.frame = CGRectMake(0, 0, menuCard.frame.width, labelDrink.frame.maxY)
-//        contentView.center.y = menuCard.frame.height / 2
-//        
-//        menuCard.addSubview(contentView)
         mainView.addSubview(menuCard)
   
         return mainView
@@ -234,12 +190,52 @@ class MenuViewController: UIViewController, SwipeViewDelegate, SwipeViewDataSour
         return cell
     }
     
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let view = UIView(frame: CGRectMake(0, 0, self.view.frame.size.width, 20))
+        view.backgroundColor = UIColor.whiteColor()
+
+        let day = tableView.tag % 5
+        var text: String!
+        
+        switch(day) {
+        case 0:
+            text = "Segunda-Feira"
+        case 1:
+            text = "Terça-Feira"
+        case 2:
+            text = "Quarta-Feira"
+        case 3:
+            text = "Quinta-Feira"
+        case 4:
+            text = "Sexta-Feira"
+        default:
+            text = ""
+        }
+        
+        let title = UILabel(frame: CGRectMake(0, 0, self.widthForCard, 20))
+        title.text = text
+        title.font = UIFont.boldSystemFontOfSize(16)
+        title.textAlignment = NSTextAlignment.Center
+        view.addSubview(title)
+        
+//        let lineBus = drawCustomImage(CGSize(width: self.view.frame.size.width, height: 1))
+//        let lineBusImageView = UIImageView(image: lineBus)
+//        lineBusImageView.frame = CGRectMake(8, title.frame.maxY + 8, self.mainViewWidth - 16, 1)
+//        view.addSubview(lineBusImageView)
+        
+        return view
+    }
+    
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 20
+    }
+    
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 70
+        return 67
     }
     
     //MARK:- Views creation functions

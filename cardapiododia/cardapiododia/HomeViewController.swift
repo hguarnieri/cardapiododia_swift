@@ -35,7 +35,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         if DeviceType.IS_IPHONE_4_OR_LESS {
             self.contentView.center.y = (self.view.frame.height / 2) + 20
         } else {
-            self.contentView.center.y = (self.view.frame.height / 2) + 80
+            self.contentView.center.y = (self.view.frame.height / 2) + 70
         }
         
         self.view.addSubview(contentView)
@@ -64,9 +64,9 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     //MARK:- View creation functions
     func createTitleView() {
         if DeviceType.IS_IPHONE_4_OR_LESS {
-            self.titleView = UIView(frame: CGRectMake(0, 44, mainViewWidth, 0))
+            self.titleView = UIView(frame: CGRectMake(0, 30, mainViewWidth, 0))
         } else {
-            self.titleView = UIView(frame: CGRectMake(0, 44, mainViewWidth, 120))
+            self.titleView = UIView(frame: CGRectMake(0, 30, mainViewWidth, 120))
             self.titleView.backgroundColor = UIColor.redColor()
             
             let imageHat = UIImage(named: "chefsHat")

@@ -192,7 +192,7 @@
 					};
 				};
 			};
-			buildConfigurationList = AE32EE311C4E105400C6F491 /* Build configuration list for PBXProject "CardapioDoDia" */;
+			buildConfigurationList = AE32EE311C4E105400C6F491 /* Build configuration list for PBXProject "cardapiododia" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -430,7 +430,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		AE32EE311C4E105400C6F491 /* Build configuration list for PBXProject "CardapioDoDia" */ = {
+		AE32EE311C4E105400C6F491 /* Build configuration list for PBXProject "cardapiododia" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AE32EE491C4E105400C6F491 /* Debug */,
